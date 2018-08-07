@@ -162,23 +162,6 @@ Let's have a look at the numerical variables. Using the `describe` function, we 
 data.describe()
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -383,7 +366,6 @@ data.describe()
     </tr>
   </tbody>
 </table>
-</div>
 
 
 
@@ -435,23 +417,6 @@ for i in range(len(count_data)):
 data.describe()
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -620,7 +585,6 @@ data.describe()
     </tr>
   </tbody>
 </table>
-</div>
 
 
 
@@ -686,23 +650,6 @@ Let's have a look at the `data` dataframe to see the remaining features.
 data.head()
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -853,8 +800,6 @@ data.head()
     </tr>
   </tbody>
 </table>
-<p>5 rows Ã 31 columns</p>
-</div>
 
 
 
@@ -915,23 +860,6 @@ Now, I only have 1072 different postcodes, which is much better than before. Let
 data.head()
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1082,8 +1010,6 @@ data.head()
     </tr>
   </tbody>
 </table>
-<p>5 rows Ã 27 columns</p>
-</div>
 
 
 
@@ -1254,22 +1180,6 @@ corr_df
     
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1948,8 +1858,6 @@ corr_df
     </tr>
   </tbody>
 </table>
-<p>27 rows Ã 27 columns</p>
-</div>
 
 
 
@@ -2033,21 +1941,6 @@ data.iloc[0:6, 0:10]
 
 
 
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2145,7 +2038,6 @@ data.iloc[0:6, 0:10]
     </tr>
   </tbody>
 </table>
-</div>
 
 
 
@@ -2155,22 +2047,6 @@ data.iloc[0:6, 11:22]
 ```
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2275,8 +2151,6 @@ data.iloc[0:6, 11:22]
     </tr>
   </tbody>
 </table>
-</div>
-
 
 
 ## One Hot Encoding for Categorical Features <a name="one_hot"></a>
