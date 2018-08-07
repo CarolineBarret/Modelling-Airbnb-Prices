@@ -1172,11 +1172,6 @@ corr_df = pd.DataFrame(data = corr_matrix, columns = temp_data.columns,
 
 corr_df
 ```
-
-    C:\Users\cbarret\AppData\Local\Continuum\anaconda3\lib\site-packages\numpy\lib\function_base.py:3183: RuntimeWarning: invalid value encountered in true_divide
-      c /= stddev[:, None]
-    C:\Users\cbarret\AppData\Local\Continuum\anaconda3\lib\site-packages\numpy\lib\function_base.py:3184: RuntimeWarning: invalid value encountered in true_divide
-      c /= stddev[None, :]
     
 
 
@@ -2208,21 +2203,6 @@ train_X.shape, test_X.shape
 
 
     ((35232, 192), (11744, 192))
-
-
-
-
-```python
-%store train_X
-%store train_y
-%store test_X
-%store test_y
-```
-
-    Stored 'train_X' (ndarray)
-    Stored 'train_y' (ndarray)
-    Stored 'test_X' (ndarray)
-    Stored 'test_y' (ndarray)
     
 
 # Modelling <a name="modelling"></a>
@@ -2262,23 +2242,6 @@ my_pipeline_RF = make_pipeline(Imputer(), StandardScaler(),
 my_pipeline_RF.fit(train_X, train_y)
 ```
 
-
-
-
-    Pipeline(memory=None,
-         steps=[('imputer', Imputer(axis=0, copy=True, missing_values='NaN', strategy='mean', verbose=0)), ('standardscaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('randomforestregressor', RandomForestRegressor(bootstrap=True, criterion='mse', max_depth=None,
-               max_features='au...estimators=10, n_jobs=1,
-               oob_score=False, random_state=42, verbose=0, warm_start=False))])
-
-
-
-
-```python
-%store my_pipeline_RF
-```
-
-    Stored 'my_pipeline_RF' (Pipeline)
-    
 
 #### Evaluation of the model
 
@@ -2356,33 +2319,6 @@ feature_importances = sorted(feature_importances, key = lambda x: x[1], reverse 
     Variable: neighbourhood_cleansed_Kensington and Chelsea Importance: 0.01
     Variable: zipcode_E8           Importance: 0.01
     Variable: zipcode_SW3          Importance: 0.01
-    
-
-
-
-
-    [None,
-     None,
-     None,
-     None,
-     None,
-     None,
-     None,
-     None,
-     None,
-     None,
-     None,
-     None,
-     None,
-     None,
-     None,
-     None,
-     None,
-     None,
-     None,
-     None,
-     None,
-     None]
 
 
 
@@ -2498,7 +2434,6 @@ random_grid = {'randomforestregressor__n_estimators': n_estimators,
 from pprint import pprint
 pprint(random_grid)
 
-%store random_grid
 ```
 
     {'randomforestregressor__bootstrap': [True, False],
@@ -2517,7 +2452,6 @@ pprint(random_grid)
                                              802,
                                              901,
                                              1000]}
-    Stored 'random_grid' (dict)
     
 
 ##### Search for best hyperparameters
@@ -2536,40 +2470,13 @@ rf_random = RandomizedSearchCV(estimator = my_pipeline_RF,
                                random_state = 42, n_jobs = -1, 
                                scoring = 'neg_median_absolute_error')
 
-%store rf_random
-```
-
-    Stored 'rf_random' (RandomizedSearchCV)
-    
+```    
 
 
 ```python
 # Fit our model
 rf_random.fit(train_X, train_y)
 ```
-
-    Fitting 2 folds for each of 50 candidates, totalling 100 fits
-    
-
-    [Parallel(n_jobs=-1)]: Done  33 tasks      | elapsed: 36.0min
-    [Parallel(n_jobs=-1)]: Done 100 out of 100 | elapsed: 165.9min finished
-    
-
-
-
-
-    RandomizedSearchCV(cv=2, error_score='raise',
-              estimator=Pipeline(memory=None,
-         steps=[('imputer', Imputer(axis=0, copy=True, missing_values='NaN', strategy='mean', verbose=0)), ('standardscaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('randomforestregressor', RandomForestRegressor(bootstrap=True, criterion='mse', max_depth=None,
-               max_features='au...estimators=10, n_jobs=1,
-               oob_score=False, random_state=42, verbose=0, warm_start=False))]),
-              fit_params=None, iid=True, n_iter=50, n_jobs=-1,
-              param_distributions={'randomforestregressor__n_estimators': [10, 109, 208, 307, 406, 505, 604, 703, 802, 901, 1000], 'randomforestregressor__max_features': ['auto', 'sqrt'], 'randomforestregressor__max_depth': [10, 35, 60, 85, 110, None], 'randomforestregressor__min_samples_split': [2, 5, 10], 'randomforestregressor__min_samples_leaf': [1, 2, 4], 'randomforestregressor__bootstrap': [True, False]},
-              pre_dispatch='2*n_jobs', random_state=42, refit=True,
-              return_train_score='warn', scoring='neg_median_absolute_error',
-              verbose=2)
-
-
 
 
 ```python
@@ -2605,13 +2512,6 @@ param_grid = {
     'randomforestregressor__n_estimators': [780, 800, 820] 
 }
 ```
-
-
-```python
-%store param_grid
-```
-
-    Stored 'param_grid' (dict)
     
 
 ##### Search for best hyperparameters
@@ -2623,11 +2523,7 @@ grid_search = GridSearchCV(estimator = my_pipeline_RF,
                            param_grid = param_grid, 
                            cv = 3, n_jobs = -1, verbose = 2, 
                            scoring = 'neg_median_absolute_error')
-
-%store grid_search
 ```
-
-    Stored 'grid_search' (GridSearchCV)
     
 
 
@@ -2635,28 +2531,6 @@ grid_search = GridSearchCV(estimator = my_pipeline_RF,
 # Fit the grid search to the data
 grid_search.fit(train_X, train_y)
 ```
-
-    Fitting 3 folds for each of 18 candidates, totalling 54 fits
-    
-
-    [Parallel(n_jobs=-1)]: Done  33 tasks      | elapsed: 141.8min
-    [Parallel(n_jobs=-1)]: Done  54 out of  54 | elapsed: 218.5min finished
-    
-
-
-
-
-    GridSearchCV(cv=3, error_score='raise',
-           estimator=Pipeline(memory=None,
-         steps=[('imputer', Imputer(axis=0, copy=True, missing_values='NaN', strategy='mean', verbose=0)), ('standardscaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('randomforestregressor', RandomForestRegressor(bootstrap=True, criterion='mse', max_depth=None,
-               max_features='au...estimators=10, n_jobs=1,
-               oob_score=False, random_state=42, verbose=0, warm_start=False))]),
-           fit_params=None, iid=True, n_jobs=-1,
-           param_grid={'randomforestregressor__bootstrap': [True], 'randomforestregressor__max_depth': [80, 85, 90], 'randomforestregressor__max_features': ['auto'], 'randomforestregressor__min_samples_leaf': [1], 'randomforestregressor__min_samples_split': [2, 4], 'randomforestregressor__n_estimators': [780, 800, 820]},
-           pre_dispatch='2*n_jobs', refit=True, return_train_score='warn',
-           scoring='neg_median_absolute_error', verbose=2)
-
-
 
 
 ```python
@@ -2695,14 +2569,6 @@ my_pipeline_RF_grid = make_pipeline(Imputer(), StandardScaler(),
 # Fit the model
 my_pipeline_RF_grid.fit(train_X, train_y)
 ```
-
-
-
-
-    Pipeline(memory=None,
-         steps=[('imputer', Imputer(axis=0, copy=True, missing_values='NaN', strategy='mean', verbose=0)), ('standardscaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('randomforestregressor', RandomForestRegressor(bootstrap=True, criterion='mse', max_depth=80,
-               max_features='auto...stimators=820, n_jobs=1,
-               oob_score=False, random_state=42, verbose=0, warm_start=False))])
 
 
 
@@ -2755,26 +2621,10 @@ my_pipeline_XGB = make_pipeline(Imputer(), StandardScaler(),
 
 # Fit the model
 my_pipeline_XGB.fit(train_X, train_y)
-%store my_pipeline_XGB
 ```
-
-    Stored 'my_pipeline_XGB' (Pipeline)
     
 
 #### Evaluation of the model
-
-
-```python
-def evaluate_model(model, predict_set, evaluate_set):
-    predictions = model.predict(predict_set)
-    from sklearn.metrics import median_absolute_error
-    print("Median Absolute Error: " + str(round(median_absolute_error(predictions, evaluate_set), 2))) 
-    from sklearn.metrics import mean_squared_error
-    from math import sqrt
-    RMSE = round(sqrt(mean_squared_error(predictions, evaluate_set)), 2)
-    print("RMSE: " + str(RMSE)) 
-```
-
 
 ```python
 result_XGB_test = evaluate_model(my_pipeline_XGB, test_X, test_y)
@@ -2869,10 +2719,7 @@ from sklearn.model_selection import GridSearchCV
 param_grid = {'xgbregressor__learning_rate': [0.1, 0.05], 
               'xgbregressor__max_depth': [5, 7, 9],
               'xgbregressor__n_estimators': [100, 500, 900]}
-%store param_grid
 ```
-
-    Stored 'param_grid' (dict)
     
 
 ##### Search for best hyperparameters
@@ -2885,10 +2732,7 @@ grid_search = GridSearchCV(estimator = my_pipeline_XGB,
                            cv = 3, n_jobs = -1, verbose = 2, 
                            scoring = 'neg_median_absolute_error')
 
-%store grid_search
 ```
-
-    Stored 'grid_search' (GridSearchCV)
     
 
 
@@ -2896,41 +2740,6 @@ grid_search = GridSearchCV(estimator = my_pipeline_XGB,
 # Fit the grid search to the data
 grid_search.fit(train_X, train_y)
 ```
-
-    Fitting 3 folds for each of 18 candidates, totalling 54 fits
-    
-
-    [Parallel(n_jobs=-1)]: Done  33 tasks      | elapsed: 40.0min
-    [Parallel(n_jobs=-1)]: Done  54 out of  54 | elapsed: 76.0min finished
-    
-
-
-
-
-    GridSearchCV(cv=3, error_score='raise',
-           estimator=Pipeline(memory=None,
-         steps=[('imputer', Imputer(axis=0, copy=True, missing_values='NaN', strategy='mean', verbose=0)), ('standardscaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('xgbregressor', XGBRegressor(base_score=0.5, booster='gbtree', colsample_bylevel=1,
-           colsample_bytree=1, gamma=0, lea...
-           reg_alpha=0, reg_lambda=1, scale_pos_weight=1, seed=None,
-           silent=True, subsample=1))]),
-           fit_params=None, iid=True, n_jobs=-1,
-           param_grid={'xgbregressor__learning_rate': [0.1, 0.05], 'xgbregressor__max_depth': [5, 7, 9], 'xgbregressor__n_estimators': [100, 500, 900]},
-           pre_dispatch='2*n_jobs', refit=True, return_train_score='warn',
-           scoring='neg_median_absolute_error', verbose=2)
-
-
-
-
-```python
-grid_search.best_score_
-```
-
-
-
-
-    -13.640864690144857
-
-
 
 
 ```python
@@ -2963,10 +2772,7 @@ my_pipeline_XGB_grid = make_pipeline(Imputer(), StandardScaler(),
 
 # Fit the model
 my_pipeline_XGB_grid.fit(train_X, train_y)
-%store my_pipeline_XGB_grid
 ```
-
-    Stored 'my_pipeline_XGB_grid' (Pipeline)
     
 
 ##### Evaluation of the model
@@ -3021,28 +2827,7 @@ my_pipeline_NN.fit(train_X, train_y)
 
 
 
-
-    Pipeline(memory=None,
-         steps=[('imputer', Imputer(axis=0, copy=True, missing_values='NaN', strategy='mean', verbose=0)), ('standardscaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('mlpregressor', MLPRegressor(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
-           beta_2=0.999, early_sto...       solver='adam', tol=0.0001, validation_fraction=0.1, verbose=False,
-           warm_start=False))])
-
-
-
 #### Evaluation of the model
-
-
-```python
-def evaluate_model(model, predict_set, evaluate_set):
-    predictions = model.predict(predict_set)
-    from sklearn.metrics import median_absolute_error
-    print("Median Absolute Error: " + str(round(median_absolute_error(predictions, evaluate_set), 2))) 
-    from sklearn.metrics import mean_squared_error
-    from math import sqrt
-    RMSE = round(sqrt(mean_squared_error(predictions, evaluate_set)), 2)
-    print("RMSE: " + str(RMSE)) 
-```
-
 
 ```python
 result_NN_test = evaluate_model(my_pipeline_NN, test_X, test_y)
@@ -3144,10 +2929,7 @@ param_grid = {
     'mlpregressor__hidden_layer_sizes': [(100,), (100, 50), (100, 100), (100, 100, 100)],
     'mlpregressor__learning_rate_init': [0.001, 0.0001],
 }
-%store param_grid
 ```
-
-    Stored 'param_grid' (dict)
     
 
 ##### Search for best hyperparameters
@@ -3160,10 +2942,7 @@ grid_search = GridSearchCV(estimator = my_pipeline_NN,
                            cv = 3, n_jobs = -1, verbose = 2,
                            scoring = 'neg_median_absolute_error')
 
-%store grid_search
 ```
-
-    Stored 'grid_search' (GridSearchCV)
     
 
 
@@ -3171,40 +2950,6 @@ grid_search = GridSearchCV(estimator = my_pipeline_NN,
 # Fit the grid search to the data
 grid_search.fit(train_X, train_y)
 ```
-
-    Fitting 3 folds for each of 64 candidates, totalling 192 fits
-    
-
-    [Parallel(n_jobs=-1)]: Done  33 tasks      | elapsed: 14.0min
-    [Parallel(n_jobs=-1)]: Done 154 tasks      | elapsed: 108.1min
-    [Parallel(n_jobs=-1)]: Done 192 out of 192 | elapsed: 145.7min finished
-    
-
-
-
-
-    GridSearchCV(cv=3, error_score='raise',
-           estimator=Pipeline(memory=None,
-         steps=[('imputer', Imputer(axis=0, copy=True, missing_values='NaN', strategy='mean', verbose=0)), ('standardscaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('mlpregressor', MLPRegressor(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
-           beta_2=0.999, early_sto...       solver='adam', tol=0.0001, validation_fraction=0.1, verbose=False,
-           warm_start=False))]),
-           fit_params=None, iid=True, n_jobs=-1,
-           param_grid={'mlpregressor__activation': ['logistic', 'tanh'], 'mlpregressor__solver': ['sgd', 'adam'], 'mlpregressor__early_stopping': [True, False], 'mlpregressor__hidden_layer_sizes': [(100,), (100, 50), (100, 100), (100, 100, 100)], 'mlpregressor__learning_rate_init': [0.001, 0.0001]},
-           pre_dispatch='2*n_jobs', refit=True, return_train_score='warn',
-           scoring='neg_median_absolute_error', verbose=2)
-
-
-
-
-```python
-grid_search.best_score_
-```
-
-
-
-
-    -15.350116526779875
-
 
 
 
@@ -3248,17 +2993,7 @@ my_pipeline_NN_grid.fit(train_X, train_y)
 
 
 
-
-    Pipeline(memory=None,
-         steps=[('imputer', Imputer(axis=0, copy=True, missing_values='NaN', strategy='mean', verbose=0)), ('standardscaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('mlpregressor', MLPRegressor(activation='logistic', alpha=0.0001, batch_size='auto',
-           beta_1=0.9, beta_2=0.999, early...
-           solver='sgd', tol=0.0001, validation_fraction=0.1, verbose=False,
-           warm_start=False))])
-
-
-
 ##### Evaluation of the model
-
 
 ```python
 result_NN_tuned_test = evaluate_model(my_pipeline_NN_grid, test_X, test_y)
